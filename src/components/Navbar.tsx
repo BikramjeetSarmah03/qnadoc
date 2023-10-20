@@ -19,7 +19,7 @@ export default async function Navbar() {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href={"/"} className="flex z-40 font-semibold">
-            <span className="text-orange-600">QnA Doc</span>
+            <span className="text-primary">QnA Doc</span>
           </Link>
 
           {/* TODO: add mobile navbar */}

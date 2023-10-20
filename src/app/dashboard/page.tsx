@@ -1,13 +1,10 @@
 import { redirect } from "next/navigation";
-import {
-  LogoutLink,
-  getKindeServerSession,
-} from "@kinde-oss/kinde-auth-nextjs/server";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import { buttonVariants } from "@/components/ui/button";
 import { db } from "../db";
+import Dashboard from "@/components/Dashboard";
 
-export default async function Dashboard() {
+export default async function DashboardPage() {
   const { getUser } = getKindeServerSession();
   const user = getUser();
 
@@ -21,11 +18,5 @@ export default async function Dashboard() {
 
   if (!dbUser) redirect("/auth-callback?origin=dashboard");
 
-  return (
-    <div>
-      {user.email}
-
-      <LogoutLink className={buttonVariants()}>Log out</LogoutLink>
-    </div>
-  );
+  return <Dashboard />;
 }

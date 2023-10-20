@@ -5,10 +5,10 @@ import {
   RegisterLink,
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
-
-import MaxWidthWrapper from "./MaxWidthWrapper";
-import { buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { buttonVariants } from "@/components/ui/button";
 
 export default async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -54,12 +54,23 @@ export default async function Navbar() {
                   </RegisterLink>
                 </>
               ) : (
-                <LogoutLink
-                  className={buttonVariants({
-                    size: "sm",
-                  })}>
-                  Log out
-                </LogoutLink>
+                <>
+                  <Link
+                    href={"/dashboard"}
+                    className={buttonVariants({
+                      size: "sm",
+                      variant: "ghost",
+                    })}>
+                    Dashboard
+                  </Link>
+
+                  <LogoutLink
+                    className={buttonVariants({
+                      size: "sm",
+                    })}>
+                    Log out
+                  </LogoutLink>
+                </>
               )}
             </>
           </div>

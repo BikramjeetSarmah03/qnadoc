@@ -28,7 +28,6 @@ export default function Home() {
 
         <Link
           href={"/dashboard"}
-          target="_blank"
           className={buttonVariants({
             size: "lg",
             className: "mt-5",

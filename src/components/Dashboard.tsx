@@ -4,7 +4,6 @@ import Skeleton from "react-loading-skeleton";
 
 import { trpc } from "@/app/_trpc/client";
 import UploadButton from "@/components/UploadButton";
-import Link from "next/link";
 import FileCard from "./FileCard";
 
 export default function Dashboard() {

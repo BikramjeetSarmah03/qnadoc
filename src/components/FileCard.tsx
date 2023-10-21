@@ -1,15 +1,26 @@
+"use client";
+
 import Link from "next/link";
-import { MessageSquare, Plus, Trash } from "lucide-react";
+import { Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import { format } from "date-fns";
 
 import { SafeFile } from "@/lib/utils";
 import { Button } from "./ui/button";
+import { trpc } from "@/app/_trpc/client";
 
 type Props = {
   file: SafeFile;
 };
 
 export default function FileCard({ file }: Props) {
+  const utils = trpc.useUtils();
+
+  const { mutate: deleteFile, isLoading } = trpc.deleteFile.useMutation({
+    onSuccess: () => {
+      utils.getUserFiles.invalidate();
+    },
+  });
+
   return (
     <li className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg">
       <Link href={`/dashboard/${file.id}`} className="flex flex-col gap-2">
@@ -38,8 +49,14 @@ export default function FileCard({ file }: Props) {
 
         <Button
           size={"sm"}
-          className="text-destructive bg-destructive/10 w-full">
-          <Trash className="h-4 w-4" />
+          className="text-destructive bg-destructive/10 hover:bg-destructive/20 transition-all w-full"
+          onClick={() => deleteFile({ id: file.id })}
+          disabled={isLoading}>
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Trash className="h-4 w-4" />
+          )}
         </Button>
       </div>
     </li>

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import "@/styles/globals.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import "simplebar-react/dist/simplebar.min.css";
 
 import { cn } from "@/lib/utils";
 

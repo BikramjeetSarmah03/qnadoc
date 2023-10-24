@@ -62,6 +62,7 @@ export default function PdfRenderer({ url }: Props) {
     handleSubmit,
     formState: { errors },
     setValue,
+    getValues,
   } = useForm<TCustomPageValidator>({
     defaultValues: {
       page: "1",
@@ -73,6 +74,7 @@ export default function PdfRenderer({ url }: Props) {
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
     setCurrPage(Number(page));
+
     setValue("page", String(page));
   };
 
@@ -84,25 +86,25 @@ export default function PdfRenderer({ url }: Props) {
             aria-label="previous page"
             variant={"ghost"}
             disabled={currPage <= 1}
-            onClick={() =>
-              setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1))
-            }>
+            onClick={() => {
+              setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1));
+              setValue("page", String(currPage - 1));
+            }}>
             <ChevronUp className="h-4 w-4" />
           </Button>
 
           <div className="flex items-center gap-1.5">
             <Input
+              {...register("page")}
               className={cn(
                 "w-12 h-8 ",
                 errors.page && "border-red-500 focus-visible:ring-red-500"
               )}
-              {...register("page")}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleSubmit(handlePageSubmit)();
                 }
               }}
-              value={currPage}
             />
             <p className="text-zinc-700 text-sm space-x-1">
               <span>/</span>
@@ -122,7 +124,7 @@ export default function PdfRenderer({ url }: Props) {
               setCurrPage((prev) =>
                 prev + 1 > numPages! ? numPages! : prev + 1
               );
-              setValue("page", String(currPage - 1));
+              setValue("page", String(currPage + 1));
             }}>
             <ChevronDown className="h-4 w-4" />
           </Button>

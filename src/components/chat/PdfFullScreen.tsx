@@ -65,7 +65,7 @@ export default function PdfFullScreen({ url }: Props) {
                 <Page
                   key={i}
                   width={width ? width : 1}
-                  height={height ? height : 1}
+                  // height={height ? height : 1}
                   pageNumber={i + 1}
                 />
               ))}

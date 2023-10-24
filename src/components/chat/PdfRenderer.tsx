@@ -87,7 +87,7 @@ export default function PdfRenderer({ url }: Props) {
             onClick={() =>
               setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1))
             }>
-            <ChevronDown className="h-4 w-4" />
+            <ChevronUp className="h-4 w-4" />
           </Button>
 
           <div className="flex items-center gap-1.5">
@@ -102,6 +102,7 @@ export default function PdfRenderer({ url }: Props) {
                   handleSubmit(handlePageSubmit)();
                 }
               }}
+              value={currPage}
             />
             <p className="text-zinc-700 text-sm space-x-1">
               <span>/</span>
@@ -123,7 +124,7 @@ export default function PdfRenderer({ url }: Props) {
               );
               setValue("page", String(currPage - 1));
             }}>
-            <ChevronUp className="h-4 w-4" />
+            <ChevronDown className="h-4 w-4" />
           </Button>
         </div>
 
